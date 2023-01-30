@@ -1,1 +1,21 @@
-/* TODO Add site wide styles */
+/* Tailwind Integration */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Defaults */
+
+body, #root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+* {
+  color: black;
+  font-family: sans-serif;
+}

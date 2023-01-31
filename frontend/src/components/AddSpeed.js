@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSpeedSetting } from "../store/speedSettings";
-import { findUnitCookie, speedLabels } from "./Settings";
+import { findSpeedLabel, findUnitCookie, speedLabels } from "./Settings";
 
 
 const AddSpeed = () => {
@@ -11,8 +11,8 @@ const AddSpeed = () => {
   const history = useHistory();
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [speed, setSpeed] = useState('');
-  const unit = findUnitCookie();
+  const [speed, setSpeed] = useState(1);
+  const unit = findUnitCookie('speed');
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -28,9 +28,10 @@ const AddSpeed = () => {
     }
 
     const newSpeedSetting = {
+      
       start_time: startTime,
       end_time: endTime,
-      speed: unit === 'Labels' ? speedLabels[speed] : speed
+      speed
     }
     const newItem = dispatch(createSpeedSetting(newSpeedSetting));
     if (newItem) {
@@ -50,8 +51,8 @@ const AddSpeed = () => {
           <label className="end-time-setting m-3">End
             <input onChange={e => setEndTime(e.target.value)} className="bg-blue-500 p-3 m-3" type="time" name="end-time" id="end-time" value={endTime} />
           </label>
-          <label className="temp-setting m-3" >Speed
-            <input onChange={e => setSpeed(e.target.value)}className="bg-blue-500 p-3 m-3" type="number" name="temp" id="speed" value={speed} />
+          <label className="speed-setting m-3 min-w-[280px] flex flex-row justify-between items-center" >Speed: {unit === 'Labels' ? findSpeedLabel(parseInt(speed)) : speed}
+            <input onChange={e => setSpeed(e.target.value)}className="bg-blue-500 m-3" type="range" name="temp" id="speed" min="1" max="3" value={speed} />
           </label>
         </form>
         <div className="clock-zone"></div>

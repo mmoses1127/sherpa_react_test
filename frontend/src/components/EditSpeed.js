@@ -14,7 +14,7 @@ const EditSpeed = () => {
   const [startTime, setStartTime] = useState(speedSetting?.startTime.slice(11, 16));
   const [endTime, setEndTime] = useState(speedSetting?.endTime.slice(11, 16));
   const unit = findUnitCookie();
-  const [speed, setSpeed] = useState(unit === 'Labels' ? findSpeedLabel(speedSetting.speed) : speedSetting.speed);
+  const [speed, setSpeed] = useState(speedSetting.speed);
 
 
   useEffect(() => {
@@ -58,8 +58,8 @@ const EditSpeed = () => {
           <label className="end-time-setting m-3">End
             <input onChange={e => setEndTime(e.target.value)} className="bg-blue-500 p-3 m-3" type="time" name="end-time" id="end-time" value={endTime} />
           </label>
-          <label className="speed-setting m-3" >Speed
-            <input onChange={e => setSpeed(e.target.value)}className="bg-blue-500 p-3 m-3" type="number" name="speed" id="speed" value={speed} />
+          <label className="speed-setting m-3 min-w-[280px] flex flex-row justify-between items-center" >Speed: {unit === 'Labels' ? findSpeedLabel(parseInt(speed)) : speed}
+            <input onChange={e => setSpeed(e.target.value)}className="bg-blue-500 m-3" type="range" name="temp" id="speed" min="1" max="3" value={speed} />
           </label>
         </form>
         <div className="clock-zone"></div>

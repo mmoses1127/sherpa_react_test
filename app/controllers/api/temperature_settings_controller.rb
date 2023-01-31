@@ -1,4 +1,4 @@
-class Api::TemperateSettingsController < ApplicationController
+class Api::TemperatureSettingsController < ApplicationController
 
   def create
     @temperature_setting = TemperatureSetting.new(temperate_settings_params)
@@ -23,6 +23,19 @@ class Api::TemperateSettingsController < ApplicationController
     @temperature_setting.destroy
     render :show
   end
+
+  def show
+    @temperature_setting = TemperatureSetting.find(params[:id])
+    render :show
+  end
+  
+  def index
+    @temperature_settings = TemperatureSetting.all
+    render :index
+  end
+
+
+  private
 
   def temperate_settings_params
     params.require(:temperature_setting).permit(:start_time, :end_time, :temperature)

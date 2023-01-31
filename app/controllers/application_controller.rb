@@ -43,6 +43,7 @@ class ApplicationController < ActionController::API
   private
 
   def snake_case_params
+    puts 'translating to snake case'
     params.deep_transform_keys!(&:underscore)
   end
 

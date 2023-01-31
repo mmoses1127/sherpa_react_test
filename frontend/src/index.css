@@ -19,3 +19,12 @@ body, #root {
   color: black;
   font-family: sans-serif;
 }
+
+button {
+  background: rgb(36, 128, 233);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 0.2rem 1rem;
+}

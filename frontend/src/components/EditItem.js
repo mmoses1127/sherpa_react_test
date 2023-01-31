@@ -1,17 +1,25 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { createTemperatureSetting, getTemperatureSetting, updateTemperatureSetting } from "../store/temperatureSettings";
+import { getTemperatureSetting, updateTemperatureSetting, fetchTemperatureSetting } from "../store/temperatureSettings";
+import { convertCtoF, convertFtoC, findUnitCookie } from "./Settings";
+
 
 const EditItem = () => {
 
   const {tempItemId} = useParams(); 
-  const tempSetting = getTemperatureSetting(tempItemId);
+  const tempSetting = useSelector(getTemperatureSetting(tempItemId));
   const dispatch = useDispatch();
   const history = useHistory();
-  const [startTime, setStartTime] = useState(tempSetting.startTime);
-  const [endTime, setEndTime] = useState(tempSetting.endTime);
-  const [temperature, setTemperature] = useState(tempSetting.temperature);
+  const [startTime, setStartTime] = useState(tempSetting?.startTime.slice(11, 16));
+  const [endTime, setEndTime] = useState(tempSetting?.endTime.slice(11, 16));
+  const unit = findUnitCookie().slice(0,1);
+  const [temperature, setTemperature] = useState(unit === 'F' ? convertCtoF(tempSetting.temperature) : tempSetting.temperature);
+
+
+  useEffect(() => {
+    dispatch(fetchTemperatureSetting(tempItemId))
+  }, [tempItemId])
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -35,7 +43,7 @@ const EditItem = () => {
       id: tempItemId,
       start_time: startTime,
       end_time: endTime,
-      temperature
+      temperature: unit === 'F' ? convertFtoC(temperature) : temperature
     }
     const updatedItem = await dispatch(updateTemperatureSetting(updatedTemperatureSetting));
     if (updatedItem) {
@@ -55,7 +63,7 @@ const EditItem = () => {
           <label className="end-time-setting m-3">End
             <input onChange={e => setEndTime(e.target.value)} className="bg-blue-500 p-3 m-3" type="time" name="end-time" id="end-time" value={endTime} />
           </label>
-          <label className="temp-setting m-3" >Temperature
+          <label className="temp-setting m-3" >Temperature ({unit})
             <input onChange={e => setTemperature(e.target.value)}className="bg-blue-500 p-3 m-3" type="number" name="temp" id="temp" value={temperature} />
           </label>
         </form>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTemperatureSetting } from "../store/temperatureSettings";
+import { convertCtoF, convertFtoC, findUnitCookie } from "./Settings";
 
 
 const AddItem = () => {
@@ -11,6 +12,7 @@ const AddItem = () => {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [temperature, setTemperature] = useState('');
+  const unit = findUnitCookie().slice(0,1);
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const AddItem = () => {
     const newTemperatureSetting = {
       start_time: startTime,
       end_time: endTime,
-      temperature
+      temperature: unit === 'F' ? convertFtoC(temperature) : temperature
     }
     const newItem = dispatch(createTemperatureSetting(newTemperatureSetting));
     if (newItem) {
@@ -53,7 +55,7 @@ const AddItem = () => {
           <label className="end-time-setting m-3">End
             <input onChange={e => setEndTime(e.target.value)} className="bg-blue-500 p-3 m-3" type="time" name="end-time" id="end-time" value={endTime} />
           </label>
-          <label className="temp-setting m-3" >Temperature
+          <label className="temp-setting m-3" >Temperature ({unit})
             <input onChange={e => setTemperature(e.target.value)}className="bg-blue-500 p-3 m-3" type="number" name="temp" id="temp" value={temperature} />
           </label>
         </form>

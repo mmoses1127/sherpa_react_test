@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AddItem from './components/AddItem';
 import EditItem from './components/EditItem';
+import Settings from './components/Settings';
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/temps/:tempItemId">
           {!currentUser ? <Redirect to="/login" /> : <EditItem />}
+        </Route>
+        <Route path="/settings">
+          {!currentUser ? <Redirect to="/login" /> : <Settings />}
         </Route>
         <Route path="">
           <Redirect to='/'/>

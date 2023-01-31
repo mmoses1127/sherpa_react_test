@@ -60,11 +60,15 @@ const Settings = () => {
   useEffect(() => {
     if (button1 && button2) {
       if ((userType === 'A' && tempUnit === 'Fahrenheit') || (userType === 'B' && speedUnit === 'numbers')) {
-        button1.style.backgroundColor = 'cyan';
+        button1.style.backgroundColor = 'blue';
+        button1.style.color = 'white';
         button2.style.backgroundColor = 'gray';
+        button2.style.color = 'black';
       } else {
         button1.style.backgroundColor = 'gray';
-        button2.style.backgroundColor = 'cyan';
+        button1.style.color = 'black';
+        button2.style.backgroundColor = 'blue';
+        button2.style.color = 'white';
       }
     }
   }, [tempUnit, speedUnit, userType]);
@@ -96,21 +100,21 @@ const Settings = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center w-full'>
-      <h1 className='text-3xl'>Settings</h1>
-      <div>
+    <div className='flex flex-col justify-center items-center w-full h-3/4'>
+      <h1 className='text-3xl mb-5'>Settings</h1>
+      <div className="h-3/4 flex flex-col items-center justify-between">
         {userType === 'A' &&
-        <>
-        <button id="farhenheit-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Fahrenheit{tempUnit === 'Fahrenheit' && <i className="fa-solid fa-check"></i>}</button>
-        <button id="celcius-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Celcius{tempUnit === 'Celcius' && <i className="fa-solid fa-check"></i>}</button>
-        </>
+        <div>
+        <button id="farhenheit-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Fahrenheit{tempUnit === 'Fahrenheit' && <i className="fa-solid fa-check text-white"></i>}</button>
+        <button id="celcius-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Celcius{tempUnit === 'Celcius' && <i className="fa-solid fa-check text-white"></i>}</button>
+        </div>
         }
 
         {userType === 'B' &&
-        <>
-        <button id="numbers-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Numbers{speedUnit === 'Numbers' && <i className="fa-solid fa-check"></i>}</button>
-        <button id="labels-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Labels{speedUnit === 'Labels' && <i className="fa-solid fa-check"></i>}</button>
-        </>
+        <div>
+        <button id="numbers-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Numbers{speedUnit === 'Numbers' && <i className="fa-solid fa-check text-white"></i>}</button>
+        <button id="labels-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Labels{speedUnit === 'Labels' && <i className="fa-solid fa-check text-white"></i>}</button>
+        </div>
         }
 
         <div className="flex flex-row justify-center items-center">

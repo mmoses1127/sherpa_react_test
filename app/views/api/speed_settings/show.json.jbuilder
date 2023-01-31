@@ -1,0 +1,1 @@
+json.extract! @speed_setting, :id, :start_time, :end_time, :speed

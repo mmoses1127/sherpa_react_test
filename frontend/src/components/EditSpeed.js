@@ -1,30 +1,30 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getTemperatureSetting, updateTemperatureSetting, fetchTemperatureSetting } from "../store/temperatureSettings";
-import { convertCtoF, convertFtoC, findUnitCookie } from "./Settings";
+import { findUnitCookie, findSpeedLabel } from "./Settings";
+import { getSpeedSetting, fetchSpeedSetting, updateSpeedSetting } from "../store/speedSettings";
 
 
-const EditItem = () => {
+const EditSpeed = () => {
 
-  const {tempItemId} = useParams(); 
-  const tempSetting = useSelector(getTemperatureSetting(tempItemId));
+  const {speedItemId} = useParams(); 
+  const speedSetting = useSelector(getSpeedSetting(speedItemId));
   const dispatch = useDispatch();
   const history = useHistory();
-  const [startTime, setStartTime] = useState(tempSetting?.startTime.slice(11, 16));
-  const [endTime, setEndTime] = useState(tempSetting?.endTime.slice(11, 16));
-  const unit = findUnitCookie().slice(0,1);
-  const [temperature, setTemperature] = useState(unit === 'F' ? convertCtoF(tempSetting.temperature) : tempSetting.temperature);
+  const [startTime, setStartTime] = useState(speedSetting?.startTime.slice(11, 16));
+  const [endTime, setEndTime] = useState(speedSetting?.endTime.slice(11, 16));
+  const unit = findUnitCookie();
+  const [speed, setSpeed] = useState(unit === 'Labels' ? findSpeedLabel(speedSetting.speed) : speedSetting.speed);
 
 
   useEffect(() => {
-    dispatch(fetchTemperatureSetting(tempItemId))
-  }, [tempItemId])
+    dispatch(fetchSpeedSetting(speedItemId))
+  }, [speedItemId])
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    if (!startTime || !endTime || !temperature) {
+    if (!startTime || !endTime || !speed) {
       alert('Please fill out all fields')
       return;
     }
@@ -34,18 +34,13 @@ const EditItem = () => {
       return;
     }
 
-    if (temperature < 0 || temperature > 100) {
-      alert('Temperature must be between 0 and 100')
-      return;
-    }
-
-    const updatedTemperatureSetting = {
-      id: tempItemId,
+    const updatedSpeedSetting = {
+      id: speedItemId,
       start_time: startTime,
       end_time: endTime,
-      temperature: unit === 'F' ? convertFtoC(temperature) : temperature
+      speed: unit === 'Labels' ? speed : speed
     }
-    const updatedItem = await dispatch(updateTemperatureSetting(updatedTemperatureSetting));
+    const updatedItem = await dispatch(updateSpeedSetting(updatedSpeedSetting));
     if (updatedItem) {
       history.push('/');
     } else {
@@ -63,8 +58,8 @@ const EditItem = () => {
           <label className="end-time-setting m-3">End
             <input onChange={e => setEndTime(e.target.value)} className="bg-blue-500 p-3 m-3" type="time" name="end-time" id="end-time" value={endTime} />
           </label>
-          <label className="temp-setting m-3" >Temperature ({unit})
-            <input onChange={e => setTemperature(e.target.value)}className="bg-blue-500 p-3 m-3" type="number" name="temp" id="temp" value={temperature} />
+          <label className="speed-setting m-3" >Speed
+            <input onChange={e => setSpeed(e.target.value)}className="bg-blue-500 p-3 m-3" type="number" name="speed" id="speed" value={speed} />
           </label>
         </form>
         <div className="clock-zone"></div>
@@ -76,4 +71,4 @@ const EditItem = () => {
 };
 
 
-export default EditItem;
+export default EditSpeed;

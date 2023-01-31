@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTemperatureSettings, getTemperatureSettings, deleteTemperatureSetting, updateTemperatureSetting } from "../store/temperatureSettings";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getCurrentUser } from "../store/session";
+import { fetchTemperatureSettings, getTemperatureSettings } from "../store/temperatureSettings";
+import { fetchSpeedSettings, getSpeedSettings } from "../store/speedSettings";
 import TempItem from "./TempItem";
+import SpeedItem from "./SpeedItem";
 import Navigation from "./Navigation";
 
 
@@ -12,10 +14,15 @@ const Dashboard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const temperatureSettings = useSelector(getTemperatureSettings);
+  const speedSettings = useSelector(getSpeedSettings);
   const userType = useSelector(getCurrentUser).userType;
 
   useEffect(() => {
-    dispatch(fetchTemperatureSettings());
+    if (userType === 'A') {
+      dispatch(fetchTemperatureSettings());
+    } else {
+      dispatch(fetchSpeedSettings());
+    }
   }, []);
 
   const handleAdd = (e) => {
@@ -31,8 +38,8 @@ const Dashboard = () => {
         {userType === 'A' && temperatureSettings.map(temperatureSetting => <TempItem temperatureSetting={temperatureSetting} key={temperatureSetting.id} />
         )}
 
-        {/* {userType === 'B' && temperatureSettings.map(temperatureSetting => <TempItem temperatureSetting={temperatureSetting} key={temperatureSetting.id} />
-        )} */}
+        {userType === 'B' && speedSettings.map(speedSetting => <SpeedItem speedSetting={speedSetting} key={speedSetting.id} />
+        )}
 
       </div>
       <button onClick={handleAdd}>Add</button>

@@ -8,7 +8,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    console.log('logout')
     await dispatch(sessionActions.logout());
     // history.push('/login');
   };

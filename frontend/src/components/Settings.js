@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getCurrentUser } from "../store/session";
 
-export const findUnitCookie = () => {
+export const findUnitCookie = (type) => {
+  const targetCookie = type === 'temp' ? 'tempUnit' : 'speedUnit';
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].split('=');
-    if (cookie[0] === 'tempUnit') {
+    console.log(cookie[0])
+    if (cookie[0].trim() === targetCookie) {
+      console.log('cookie found')
       return cookie[1];
     }
   }
+  console.log('cookie not found')
   return 'Fahrenheit';
 };
 
@@ -17,44 +23,64 @@ export const convertCtoF = (temp) => {
 };
 
 export const convertFtoC = (temp) => {
-  return Math.round((temp - 32) * 5/9);
+  return Math.round(((temp - 32) * 5/9) * 10) / 10;
 };
+
+export const speedLabels = {
+  'low': 1,
+  'medium': 2,
+  'high': 3
+}
+
+export const findSpeedLabel = (speedNumber) => {
+  for (let key in speedLabels) {
+    if (speedLabels[key] === speedNumber) {
+      return key;
+    }
+  }
+}
 
 const Settings = () => {
 
   const history = useHistory();
+  const userType = useSelector(getCurrentUser).userType;
 
-
-  const [tempUnit, setTempUnit] = useState(findUnitCookie());
+  const [tempUnit, setTempUnit] = useState(findUnitCookie('temp'));
+  const [speedUnit, setSpeedUnit] = useState(findUnitCookie('speed'));
 
   useEffect(() => {
-    if (tempUnit === 'Fahrenheit') {
+    if (tempUnit === 'Fahrenheit' || speedUnit === 'numbers') {
       document.getElementById('farhenheit-button').style.backgroundColor = 'cyan';
       document.getElementById('celcius-button').style.backgroundColor = 'gray';
     } else {
       document.getElementById('farhenheit-button').style.backgroundColor = 'gray';
       document.getElementById('celcius-button').style.backgroundColor = 'cyan';
     }
-  }, [tempUnit]);
+  }, [tempUnit, speedUnit]);
 
 
   const handleSelect = (e) => {
     e.preventDefault();
-    setTempUnit(e.target.innerHTML);
-    console.log(tempUnit)
+    if (userType === 'A') {
+      setTempUnit(e.target.innerHTML);
+    } else {
+      setSpeedUnit(e.target.innerHTML);
+    }
     e.target.style.backgroundColor = 'cyan';
   };
-
+  
   const handleCancel = (e) => {
     e.preventDefault();
-    console.log('cancel')
+    history.push('/')
   };
-
+  
   const handleSave = (e) => {
     e.preventDefault();
-    console.log('save')
-    document.cookie = `tempUnit=${tempUnit}; path=/; max-age=31536000; SameSite=Lax; Secure;`
-    console.log(document.cookie)
+    if (userType === 'A') {
+      document.cookie = `tempUnit=${tempUnit}; path=/; max-age=31536000; SameSite=Lax; Secure;`
+    } else {
+      document.cookie = `speedUnit=${speedUnit}; path=/; max-age=31536000; SameSite=Lax; Secure;`
+    }
     history.push('/')
   };
 
@@ -62,14 +88,19 @@ const Settings = () => {
     <div className='flex flex-col justify-center items-center w-full'>
       <h1 className='text-3xl'>Settings</h1>
       <div>
-          {/* <input className="appearance-none bg-slate-200 text-black checked:bg-cyan-500 h-10 w-10 position-absolute" type='radio' name='tempUnit' value='Fahrenheit' id='fahrenheit'/>
-          <label className="h-10 w-10 bg-slate-200 text-black" for="fahrenheit">Fahrenheit</label>
-
-          <input className="appearance-none bg-slate-200 text-black checked:bg-cyan-500 h-10 w-10 position-absolute" type='radio' name='tempUnit' value='Celcius' id='Celcius' />
-          <label className="h-10 w-10 bg-slate-200 text-black" for="celcius">Celcius</label> */}
-
+        {userType === 'A' &&
+        <>
         <button id="farhenheit-button" className='bg-slate-200 text-black' onClick={handleSelect}>Fahrenheit{tempUnit === 'Fahrenheit' && <i className="fa-solid fa-check"></i>}</button>
         <button id="celcius-button"className='bg-slate-200 text-black' onClick={handleSelect}>Celcius{tempUnit === 'Celcius' && <i className="fa-solid fa-check"></i>}</button>
+        </>
+        }
+
+        {userType === 'B' &&
+        <>
+        <button id="farhenheit-button" className='bg-slate-200 text-black' onClick={handleSelect}>Numbers{speedUnit === 'Numbers' && <i className="fa-solid fa-check"></i>}</button>
+        <button id="celcius-button"className='bg-slate-200 text-black' onClick={handleSelect}>Labels{speedUnit === 'Labels' && <i className="fa-solid fa-check"></i>}</button>
+        </>
+        }
 
         <div>
           <button onClick={handleCancel} className="m-3 bg-slate-200 text-black">Cancel</button>

@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AddSetting from './components/AddSetting';
-import EditItem from './components/EditItem';
+// import EditSetting from './components/EditSetting';
+import EditSpeed from './components/EditSpeed';
+import EditTemp from './components/EditTemp';
 import Settings from './components/Settings';
 
 
@@ -24,7 +26,10 @@ function App() {
           {!currentUser ? <Redirect to="/login" /> : <AddSetting />}
         </Route>
         <Route path="/temps/:tempItemId">
-          {!currentUser ? <Redirect to="/login" /> : <EditItem />}
+          {!currentUser ? <Redirect to="/login" /> : <EditTemp />}
+        </Route>
+        <Route path="/speeds/:speedItemId">
+          {!currentUser ? <Redirect to="/login" /> : <EditSpeed />}
         </Route>
         <Route path="/settings">
           {!currentUser ? <Redirect to="/login" /> : <Settings />}

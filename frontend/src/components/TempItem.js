@@ -5,9 +5,10 @@ import { findUnitCookie, convertCtoF } from "./Settings";
 
 
 const TempItem = ({temperatureSetting}) => {
+  
   const dispatch = useDispatch();
   const history = useHistory();
-  const unit = findUnitCookie().slice(0,1);
+  const unit = findUnitCookie('temp').slice(0,1);
   const temp = unit === 'F' ? convertCtoF(temperatureSetting.temperature) : temperatureSetting.temperature;
 
   const handleDelete = (e) => {
@@ -18,7 +19,6 @@ const TempItem = ({temperatureSetting}) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log('update')
     history.push(`/temps/${temperatureSetting.id}`)
   };
 

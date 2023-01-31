@@ -16,19 +16,35 @@ ApplicationRecord.transaction do
   # For easy testing, so that after seeding, the first `User` has `id` of 1
   ApplicationRecord.connection.reset_pk_sequence!('users')
 
+  puts "Creating user types..."
+  # Create A and B UserTypes:
+
+  UserType.create!(
+
+    name: 'A'
+  )
+
+  UserType.create!(
+
+    name: 'B'
+  )
+  
   puts "Creating users..."
-  # Create one user with an easy to remember username, email, and password:
+  # Create one user of each type, A and B:
   User.create!(
 
     email: 'a@user.io', 
-    password: 'password'
+    password: 'password',
+    user_type_id: UserType.find_by(name: 'A').id
   )
 
   User.create!(
 
     email: 'b@user.io', 
-    password: 'password'
+    password: 'password',
+    user_type_id: UserType.find_by(name: 'B').id
   )
+
 
 
   puts "Done!"

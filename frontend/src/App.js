@@ -2,7 +2,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import AddItem from './components/AddItem';
+import AddSetting from './components/AddSetting';
 import EditItem from './components/EditItem';
 import Settings from './components/Settings';
 
@@ -20,8 +20,8 @@ function App() {
         <Route path="/login">
           {currentUser ? <Redirect to="/" /> : <Login />}
         </Route>
-        <Route path="/add-item">
-          {!currentUser ? <Redirect to="/login" /> : <AddItem />}
+        <Route path="/add-setting">
+          {!currentUser ? <Redirect to="/login" /> : <AddSetting />}
         </Route>
         <Route path="/temps/:tempItemId">
           {!currentUser ? <Redirect to="/login" /> : <EditItem />}

@@ -1,6 +1,5 @@
 import {Switch, Route, Redirect} from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AddItem from './components/AddItem';
@@ -14,7 +13,6 @@ function App() {
 
   return (
     <>
-      <Navigation />
       <Switch>
         <Route exact path="/">
           {!currentUser ? <Redirect to="/login" /> : <Dashboard />}

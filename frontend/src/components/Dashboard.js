@@ -3,6 +3,7 @@ import { fetchTemperatureSettings, getTemperatureSettings, deleteTemperatureSett
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import TempItem from "./TempItem";
+import Navigation from "./Navigation";
 
 
 const Dashboard = () => {
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <Navigation />
       <div className="flex flex-col justify-center items-center min-w-[80%]">
         {temperatureSettings.map(temperatureSetting => <TempItem temperatureSetting={temperatureSetting} key={temperatureSetting.id} />
         )}

@@ -5,6 +5,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :session_token, presence: true, uniqueness: true
   validates :password, length: { in: 6..255 }, allow_nil: true
+
+  belongs_to :user_type,
+    foreign_key: :user_type_id,
+    class_name: :UserType
   
 
   def self.find_by_credentials(email, password)

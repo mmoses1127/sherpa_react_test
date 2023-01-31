@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AddItem from './components/AddItem';
+import EditItem from './components/EditItem';
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path="/add-item">
           {!currentUser ? <Redirect to="/login" /> : <AddItem />}
+        </Route>
+        <Route path="/temps/:tempItemId">
+          {!currentUser ? <Redirect to="/login" /> : <EditItem />}
         </Route>
         <Route path="">
           <Redirect to='/'/>

@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { createTemperatureSetting } from "../store/temperatureSettings";
+import { useHistory, useParams } from "react-router-dom";
+import { createTemperatureSetting, getTemperatureSetting, updateTemperatureSetting } from "../store/temperatureSettings";
 
+const EditItem = () => {
 
-const AddItem = () => {
-
+  const {tempItemId} = useParams(); 
+  const tempSetting = getTemperatureSetting(tempItemId);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [temperature, setTemperature] = useState('');
+  const [startTime, setStartTime] = useState(tempSetting.startTime);
+  const [endTime, setEndTime] = useState(tempSetting.endTime);
+  const [temperature, setTemperature] = useState(tempSetting.temperature);
 
-  const handleSave = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
     if (!startTime || !endTime || !temperature) {
@@ -30,16 +31,17 @@ const AddItem = () => {
       return;
     }
 
-    const newTemperatureSetting = {
+    const updatedTemperatureSetting = {
+      id: tempItemId,
       start_time: startTime,
       end_time: endTime,
       temperature
     }
-    const newItem = dispatch(createTemperatureSetting(newTemperatureSetting));
-    if (newItem) {
+    const updatedItem = await dispatch(updateTemperatureSetting(updatedTemperatureSetting));
+    if (updatedItem) {
       history.push('/');
     } else {
-      alert('Item could not be created')
+      alert('Item could not be updated')
     }
   }
 
@@ -59,10 +61,11 @@ const AddItem = () => {
         </form>
         <div className="clock-zone"></div>
       </div>
-      <button onClick={handleSave}>Save</button>
+      <button onClick={handleUpdate}>Save</button>
     </>
   );
 
-}
+};
 
-export default AddItem;
+
+export default EditItem;

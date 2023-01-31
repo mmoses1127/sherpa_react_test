@@ -29,7 +29,7 @@ export const getTemperatureSettings = (state) => {
   if (!state.temperatureSettings) return [];
   let unsortedTemperatureSettings = Object.values(state.temperatureSettings);
   return unsortedTemperatureSettings.sort((a, b) => {
-    if (a.startTime > b.startTime) {
+    if (a.startTime < b.startTime) {
       return -1
     } else {
       return 1
@@ -82,7 +82,8 @@ export const createTemperatureSetting = (temperatureSetting) => async dispatch =
     return newTemperatureSetting;
   } else {
     const errors = await res.json();
-    console.log(errors)
+    console.log(errors);
+    return null;
   }
 };
 
@@ -95,7 +96,12 @@ export const updateTemperatureSetting = (temperatureSetting) => async dispatch =
   if (res.ok) {
     const updatedTemperatureSetting = await res.json();
     dispatch(addTemperatureSetting(updatedTemperatureSetting));
-  };
+    return updatedTemperatureSetting;
+  } else {
+    const errors = await res.json();
+    console.log(errors)
+    return null;
+  }
 };
 
 const temperatureSettingsReducer = (state = {}, action) => {

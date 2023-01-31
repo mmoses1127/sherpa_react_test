@@ -1,0 +1,1 @@
+json.extract! @temperature_setting, :id, :start_time, :end_time, :temperature

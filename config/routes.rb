@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:show, :create, :destroy]
+    resources :temperature_settings, only: [:create, :update, :destroy, :show, :index]
   end
 
 end

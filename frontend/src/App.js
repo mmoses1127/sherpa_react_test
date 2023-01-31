@@ -1,15 +1,16 @@
 import {Switch, Route, Redirect} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import { useSelector } from 'react-redux';
+import AddItem from './components/AddItem';
+import EditItem from './components/EditItem';
+import Settings from './components/Settings';
 
 
 function App() {
 
   const currentUser = useSelector(state => state.session.user);
-  console.log(currentUser)
-  // const loggedIn = false;
 
   return (
     <>
@@ -20,6 +21,15 @@ function App() {
         </Route>
         <Route path="/login">
           {currentUser ? <Redirect to="/" /> : <Login />}
+        </Route>
+        <Route path="/add-item">
+          {!currentUser ? <Redirect to="/login" /> : <AddItem />}
+        </Route>
+        <Route path="/temps/:tempItemId">
+          {!currentUser ? <Redirect to="/login" /> : <EditItem />}
+        </Route>
+        <Route path="/settings">
+          {!currentUser ? <Redirect to="/login" /> : <Settings />}
         </Route>
         <Route path="">
           <Redirect to='/'/>

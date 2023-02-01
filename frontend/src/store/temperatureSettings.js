@@ -82,7 +82,7 @@ export const createTemperatureSetting = (temperatureSetting) => async dispatch =
     return newTemperatureSetting;
   } else {
     const errors = await res.json();
-    console.log(errors);
+    alert(errors);
     return null;
   }
 };
@@ -99,7 +99,7 @@ export const updateTemperatureSetting = (temperatureSetting) => async dispatch =
     return updatedTemperatureSetting;
   } else {
     const errors = await res.json();
-    console.log(errors)
+    alert(errors)
     return null;
   }
 };

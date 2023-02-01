@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AddSetting from './components/AddSetting';
-// import EditSetting from './components/EditSetting';
 import EditSpeed from './components/EditSpeed';
 import EditTemp from './components/EditTemp';
 import Settings from './components/Settings';

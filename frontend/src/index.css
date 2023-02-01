@@ -26,7 +26,6 @@ body, #root {
 }
 
 * {
-  /* color: black; */
   font-family: sans-serif;
   font-weight: 600;
 }
@@ -40,15 +39,8 @@ button {
   padding: 0.2rem 1rem;
 }
 
-/* input[type='email'], input[type='password'], input[type='text'] {
-  -webkit-appearance: none;
-  background-color: rgb(193, 251, 255);
-} */
-
 input[type="time"]::-webkit-calendar-picker-indicator {
-  /* background: none; */
   filter: invert(100%);
-  /* color: white; */
 }
 
 input[type="time"]::-webkit-calendar-picker {
@@ -61,7 +53,6 @@ input {
 }
 
 input[type="email"], input[type="password"] {
-  /* -webkit-appearance: none; */
   background-color: rgb(193, 251, 255);
   color: black;
 }

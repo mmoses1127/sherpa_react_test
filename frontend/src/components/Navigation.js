@@ -9,7 +9,6 @@ const Navigation = () => {
 
   const handleLogout = async () => {
     await dispatch(sessionActions.logout());
-    // history.push('/login');
   };
 
 

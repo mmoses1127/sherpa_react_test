@@ -82,7 +82,7 @@ export const createSpeedSetting = (speedSetting) => async dispatch => {
     return newSpeedSetting;
   } else {
     const errors = await res.json();
-    console.log(errors);
+    alert(errors);
     return null;
   }
 };
@@ -99,7 +99,7 @@ export const updateSpeedSetting = (speedSetting) => async dispatch => {
     return updatedSpeedSetting;
   } else {
     const errors = await res.json();
-    console.log(errors)
+    alert(errors)
     return null;
   }
 };

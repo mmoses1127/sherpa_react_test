@@ -39,6 +39,8 @@ Sign up is currently disabled but below are the login credentials for the two us
 - User A: email: a@test.io password: 'password'
 - User B: email: b@test.io password: 'password'
 
+The authentication protocol is currently set to tab-strictness, meaning that closing a tab will log a user out, and multiple users can be logged in on different tabs. These settings can be changed by changing the location from which the session restore function acquires the user credential (from sessionStorage to browser cookies).
+
 # Development Notes
 
 ## Styling

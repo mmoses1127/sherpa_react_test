@@ -23,7 +23,7 @@ const Dashboard = () => {
     } else {
       dispatch(fetchSpeedSettings());
     }
-  }, []);
+  }, [dispatch, userType]);
 
   const handleAdd = (e) => {
     e.preventDefault();

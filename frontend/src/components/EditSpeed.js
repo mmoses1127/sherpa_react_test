@@ -19,7 +19,7 @@ const EditSpeed = () => {
 
   useEffect(() => {
     dispatch(fetchSpeedSetting(speedItemId))
-  }, []);
+  }, [dispatch, speedItemId]);
 
   useEffect(() => {
     if (speedSetting) {

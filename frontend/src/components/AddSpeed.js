@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSpeedSetting } from "../store/speedSettings";
-import { findSpeedLabel, findUnitCookie, speedLabels } from "./Settings";
+import { findSpeedLabel, findUnitCookie } from "./Settings";
 
 
 const AddSpeed = () => {

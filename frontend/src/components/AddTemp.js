@@ -21,7 +21,7 @@ const AddTemp = () => {
       if (temperature < 0) setTemperature(0);
       if (temperature > 100) setTemperature(100);
     }
-  }, [temperature]);
+  }, [temperature, unit]);
 
   const handleSave = (e) => {
     e.preventDefault();

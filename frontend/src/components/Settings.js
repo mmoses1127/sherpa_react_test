@@ -44,10 +44,11 @@ const Settings = () => {
 
   const [tempUnit, setTempUnit] = useState(findUnitCookie('temp'));
   const [speedUnit, setSpeedUnit] = useState(findUnitCookie('speed'));
-  let button1;
-  let button2;
-  
+
   useEffect(() => {
+    let button1;
+    let button2;
+
     if (userType === 'A') {
       button1 = document.getElementById('farhenheit-button');
       button2 = document.getElementById('celcius-button');

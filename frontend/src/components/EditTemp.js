@@ -19,7 +19,7 @@ const EditTemp = () => {
 
   useEffect(() => {
     dispatch(fetchTemperatureSetting(tempItemId))
-  }, []);
+  }, [dispatch, tempItemId]);
 
   useEffect(() => {
     if (tempSetting) {
@@ -27,7 +27,7 @@ const EditTemp = () => {
       setEndTime(tempSetting.endTime.slice(11, 16));
       setTemperature(unit === 'F' ? convertCtoF(tempSetting.temperature) : tempSetting.temperature);
     }
-  }, [tempSetting]);
+  }, [tempSetting, unit]);
 
   useEffect(() => {
     if (unit === 'F') {
@@ -37,7 +37,7 @@ const EditTemp = () => {
       if (temperature < 0) setTemperature(0);
       if (temperature > 100) setTemperature(100);
     }
-  }, [temperature]);
+  }, [temperature, unit]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();

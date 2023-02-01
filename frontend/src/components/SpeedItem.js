@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteSpeedSetting } from "../store/speedSettings";
-import { findUnitCookie, speedLabels, findSpeedLabel } from "./Settings";
+import { findUnitCookie, findSpeedLabel } from "./Settings";
 
 const SpeedItem = ({speedSetting}) => {
 

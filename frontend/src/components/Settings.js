@@ -46,29 +46,31 @@ const Settings = () => {
   const [speedUnit, setSpeedUnit] = useState(findUnitCookie('speed'));
   let button1;
   let button2;
-
-  if (userType === 'A') {
-    button1 = document.getElementById('farhenheit-button');
-    button2 = document.getElementById('celcius-button');
-  } else {
-    button1 = document.getElementById('numbers-button');
-    button2 = document.getElementById('labels-button');
-  }
-
-  console.log(findUnitCookie('temp'))
-
+  
   useEffect(() => {
-    if (button1 && button2) {
-      if ((userType === 'A' && tempUnit === 'Fahrenheit') || (userType === 'B' && speedUnit === 'numbers')) {
+    if (userType === 'A') {
+      button1 = document.getElementById('farhenheit-button');
+      button2 = document.getElementById('celcius-button');
+    } else {
+      button1 = document.getElementById('numbers-button');
+      button2 = document.getElementById('labels-button');
+    }
+    if (1) {
+      console.log(userType === 'A' && tempUnit === 'Fahrenheit')
+      if ((userType === 'A' && tempUnit === 'Fahrenheit') || (userType === 'B' && speedUnit === 'Numbers')) {
         button1.style.backgroundColor = 'blue';
         button1.style.color = 'white';
+        button1.innerHTML = button1.innerHTML + ' &#x2713;';
         button2.style.backgroundColor = 'gray';
         button2.style.color = 'black';
+        button2.innerHTML = userType === 'A' ? 'Celcius' : 'Labels';
       } else {
         button1.style.backgroundColor = 'gray';
         button1.style.color = 'black';
+        button1.innerHTML = userType === 'A' ? 'Fahrenheit' : 'Numbers';
         button2.style.backgroundColor = 'blue';
         button2.style.color = 'white';
+        button2.innerHTML = button2.innerHTML + ' &#x2713;';
       }
     }
   }, [tempUnit, speedUnit, userType]);
@@ -76,12 +78,13 @@ const Settings = () => {
 
   const handleSelect = (e) => {
     e.preventDefault();
+    let unit = e.target.innerHTML.split(' ')[0];
     if (userType === 'A') {
-      setTempUnit(e.target.innerHTML.split('<')[0]);
+      setTempUnit(unit);
     } else {
-      setSpeedUnit(e.target.innerHTML.split('<')[0]);
+      console.log(unit)
+      setSpeedUnit(unit);
     }
-    e.target.style.backgroundColor = 'cyan';
   };
   
   const handleCancel = (e) => {
@@ -105,15 +108,15 @@ const Settings = () => {
       <div className="h-3/4 flex flex-col items-center justify-between">
         {userType === 'A' &&
         <div>
-        <button id="farhenheit-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Fahrenheit{tempUnit === 'Fahrenheit' && <i className="fa-solid fa-check text-white"></i>}</button>
-        <button id="celcius-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Celcius{tempUnit === 'Celcius' && <i className="fa-solid fa-check text-white"></i>}</button>
+        <button id="farhenheit-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Fahrenheit </button>
+        <button id="celcius-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Celcius</button>
         </div>
         }
 
         {userType === 'B' &&
         <div>
-        <button id="numbers-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Numbers{speedUnit === 'Numbers' && <i className="fa-solid fa-check text-white"></i>}</button>
-        <button id="labels-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Labels{speedUnit === 'Labels' && <i className="fa-solid fa-check text-white"></i>}</button>
+        <button id="numbers-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Numbers</button>
+        <button id="labels-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Labels</button>
         </div>
         }
 

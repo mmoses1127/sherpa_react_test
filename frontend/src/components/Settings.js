@@ -55,24 +55,23 @@ const Settings = () => {
       button1 = document.getElementById('numbers-button');
       button2 = document.getElementById('labels-button');
     }
-    if (1) {
-      console.log(userType === 'A' && tempUnit === 'Fahrenheit')
-      if ((userType === 'A' && tempUnit === 'Fahrenheit') || (userType === 'B' && speedUnit === 'Numbers')) {
-        button1.style.backgroundColor = 'rgb(36, 175, 233)';
-        button1.style.color = 'white';
-        button1.innerHTML = button1.innerHTML + ' &#x2713;';
-        button2.style.backgroundColor = 'rgb(209, 209, 209)';
-        button2.style.color = 'black';
-        button2.innerHTML = userType === 'A' ? 'Celcius' : 'Labels';
-      } else {
-        button1.style.backgroundColor = 'rgb(209, 209, 209)';
-        button1.style.color = 'black';
-        button1.innerHTML = userType === 'A' ? 'Fahrenheit' : 'Numbers';
-        button2.style.backgroundColor = 'rgb(36, 175, 233)';
-        button2.style.color = 'white';
-        button2.innerHTML = button2.innerHTML + ' &#x2713;';
-      }
+
+    if ((userType === 'A' && tempUnit === 'Fahrenheit') || (userType === 'B' && speedUnit === 'Numbers')) {
+      button1.style.backgroundColor = 'rgb(36, 175, 233)';
+      button1.style.color = 'white';
+      button1.innerHTML = userType === 'A' ? 'Fahrenheit &#x2713;' : 'Numbers &#x2713;'
+      button2.style.backgroundColor = 'rgb(209, 209, 209)';
+      button2.style.color = 'black';
+      button2.innerHTML = userType === 'A' ? 'Celcius' : 'Labels';
+    } else {
+      button1.style.backgroundColor = 'rgb(209, 209, 209)';
+      button1.style.color = 'black';
+      button1.innerHTML = userType === 'A' ? 'Fahrenheit' : 'Numbers';
+      button2.style.backgroundColor = 'rgb(36, 175, 233)';
+      button2.style.color = 'white';
+      button2.innerHTML = userType === 'A' ? 'Celcius &#x2713;' : 'Labels &#x2713;'
     }
+    
   }, [tempUnit, speedUnit, userType]);
 
 
@@ -82,7 +81,6 @@ const Settings = () => {
     if (userType === 'A') {
       setTempUnit(unit);
     } else {
-      console.log(unit)
       setSpeedUnit(unit);
     }
   };

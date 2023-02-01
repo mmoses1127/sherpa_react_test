@@ -59,3 +59,16 @@ input {
   text-align: center;
   color: white;
 }
+
+input[type="email"], input[type="password"] {
+  /* -webkit-appearance: none; */
+  background-color: rgb(193, 251, 255);
+  color: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgb(193, 251, 255) inset !important;
+}

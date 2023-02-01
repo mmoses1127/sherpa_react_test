@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
+// import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -17,31 +18,17 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-function Root() {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  );
-}
-
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <Root />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
+const root = createRoot(document.getElementById("root"));
 
 const renderApplication = () => {
-  ReactDOM.render(
+  root.render(
     <React.StrictMode>
-      <Root />
-    </React.StrictMode>,
-    document.getElementById('root')
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
   );
 }
 

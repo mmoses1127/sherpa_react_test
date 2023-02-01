@@ -29,19 +29,19 @@ const Login = () => {
   }
 
   return (
-    <div className="w-1/2 flex flex-col justify-center items-center">
+    <div className="w-1/2 min-w-[300px] flex flex-col justify-center items-center">
       <h1 className="text-xl">Welcome to App</h1>
-      <form className="w-100% flex flex-col justify-center">
+      <form className="w-3/4 flex flex-col justify-center items-center">
         {errors.length > 0 && (
           <ul className="w-4/4 bg-red-300 m-2">
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
         )}
-        <label className="m-2" htmlFor="email">Email</label>
-        <input onChange={e => setEmail(e.target.value)} className="w-4/4 bg-cyan-300 m-2" type="email" name="email" id="email" />
-        <label className="m-2" htmlFor="password">Password</label>
-        <input onChange={e => setPassword(e.target.value)} className="w-4/4 bg-cyan-300 m-2" type="password" name="password" id="password" />
-        <button className="bg-cyan-500 m-2 w-1/2" onClick={handleLogin}>Login</button>
+        <label className="m-2 w-full" htmlFor="email">Email</label>
+        <input onChange={e => setEmail(e.target.value)} className=" appearance-none w-full h-10 m-2 bg-lightBlue autofill:bg-lightBlue" type="email" name="email" id="email" />
+        <label className="m-2 w-full" htmlFor="password">Password</label>
+        <input onChange={e => setPassword(e.target.value)} className="w-full h-10 m-2 bg-lightBlue" type="password" name="password" id="password" />
+        <button className="bg-blue m-2 w-1/4 min-w-[75px]" onClick={handleLogin}>Login</button>
       </form>
     </div>
   )

@@ -58,17 +58,17 @@ const Settings = () => {
     if (1) {
       console.log(userType === 'A' && tempUnit === 'Fahrenheit')
       if ((userType === 'A' && tempUnit === 'Fahrenheit') || (userType === 'B' && speedUnit === 'Numbers')) {
-        button1.style.backgroundColor = 'blue';
+        button1.style.backgroundColor = 'rgb(36, 175, 233)';
         button1.style.color = 'white';
         button1.innerHTML = button1.innerHTML + ' &#x2713;';
-        button2.style.backgroundColor = 'gray';
+        button2.style.backgroundColor = 'rgb(209, 209, 209)';
         button2.style.color = 'black';
         button2.innerHTML = userType === 'A' ? 'Celcius' : 'Labels';
       } else {
-        button1.style.backgroundColor = 'gray';
+        button1.style.backgroundColor = 'rgb(209, 209, 209)';
         button1.style.color = 'black';
         button1.innerHTML = userType === 'A' ? 'Fahrenheit' : 'Numbers';
-        button2.style.backgroundColor = 'blue';
+        button2.style.backgroundColor = 'rgb(36, 175, 233)';
         button2.style.color = 'white';
         button2.innerHTML = button2.innerHTML + ' &#x2713;';
       }
@@ -104,25 +104,25 @@ const Settings = () => {
 
   return (
     <div className='flex flex-col justify-center items-center w-full h-3/4'>
-      <h1 className='text-3xl mb-5'>Settings</h1>
+      <h1 className='text-xl mb-10'>Select {userType === 'A' ? 'Temperature' : 'Speed'} Units</h1>
       <div className="h-3/4 flex flex-col items-center justify-between">
         {userType === 'A' &&
-        <div>
-        <button id="farhenheit-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Fahrenheit </button>
-        <button id="celcius-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Celcius</button>
+        <div className="mb-10">
+        <button id="farhenheit-button" className='bg-slate-200 text-black min-w-[150px] h-12' onClick={handleSelect}>Fahrenheit </button>
+        <button id="celcius-button"className='bg-slate-200 text-black min-w-[150px] h-12' onClick={handleSelect}>Celcius</button>
         </div>
         }
 
         {userType === 'B' &&
-        <div>
-        <button id="numbers-button" className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Numbers</button>
-        <button id="labels-button"className='bg-slate-200 text-black min-w-[150px]' onClick={handleSelect}>Labels</button>
+        <div className="mb-10">
+        <button id="numbers-button" className='bg-slate-200 text-black min-w-[150px] h-12' onClick={handleSelect}>Numbers</button>
+        <button id="labels-button"className='bg-slate-200 text-black min-w-[150px] h-12' onClick={handleSelect}>Labels</button>
         </div>
         }
 
         <div className="flex flex-row justify-center items-center">
-          <button onClick={handleCancel} className="m-3 bg-slate-200 text-black  min-w-[100px]">Cancel</button>
-          <button onClick={handleSave} className="m-3  min-w-[100px]">Save</button>
+          <button onClick={handleCancel} className="m-3 bg-slate-200 text-black  min-w-[100px] h-12">Cancel</button>
+          <button onClick={handleSave} className="m-3  min-w-[100px] h-12">Save</button>
         </div>
       </div>
     </div>

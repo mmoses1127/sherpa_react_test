@@ -15,8 +15,8 @@ const Navigation = () => {
 
   return (
     <div className='flex flex-row justify-end items-end w-full'>
-      <a className='text-cyan-500 m-5' onClick={handleLogout} href="#">Log Out</a>
-      <a className='text-cyan-500 m-5' href="/settings">Settings</a>
+      <a className='text-blue m-5' onClick={handleLogout} href="#">Log Out</a>
+      <a className='text-blue m-5' href="/settings">Settings</a>
     </div>
   )
 }

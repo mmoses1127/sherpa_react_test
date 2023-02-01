@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Colors */
+
+:root {
+  --blue: 36 175 233;
+  --lightBlue: 193 251 255;
+  --red: 255 0 0;
+  --gray: 209 209 209;
+  
+}
+
 /* Defaults */
 
 body, #root {
@@ -16,15 +26,36 @@ body, #root {
 }
 
 * {
-  color: black;
+  /* color: black; */
   font-family: sans-serif;
+  font-weight: 600;
 }
 
 button {
-  background: rgb(36, 128, 233);
+  background: rgb(36, 175, 233);
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 1px;
   padding: 0.2rem 1rem;
+}
+
+/* input[type='email'], input[type='password'], input[type='text'] {
+  -webkit-appearance: none;
+  background-color: rgb(193, 251, 255);
+} */
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  /* background: none; */
+  filter: invert(100%);
+  /* color: white; */
+}
+
+input[type="time"]::-webkit-calendar-picker {
+  margin-left: 100px;
+}
+
+input {
+  text-align: center;
+  color: white;
 }

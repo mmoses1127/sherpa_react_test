@@ -11,6 +11,8 @@ export const getCurrentUser = (state = {}) => {
   }
 }
 
+// Sign up function in case it is needed later:
+
 // export const signup = inputs => async dispatch => {
 //   let {email, name, password} = inputs;
 //   let res = await csrfFetch('/api/users', {

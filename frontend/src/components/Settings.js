@@ -16,7 +16,7 @@ export const findUnitCookie = (type) => {
 };
 
 export const convertCtoF = (temp) => {
-  return Math.round((temp * 9/5) + 32);
+  return Math.round(((temp * 9/5) + 32) * 10) / 10;
 };
 
 export const convertFtoC = (temp) => {
@@ -104,7 +104,7 @@ const Settings = () => {
 
   return (
     <div className='flex flex-col justify-center items-center w-full h-3/4'>
-      <h1 className='text-xl mb-10'>Select {userType === 'A' ? 'Temperature' : 'Speed'} Units</h1>
+      <h1 className='text-xl mb-10'>{userType === 'A' ? 'Select Temperature Units' : 'Select Intensity Display Mode'}</h1>
       <div className="h-3/4 flex flex-col items-center justify-between">
         {userType === 'A' &&
         <div className="mb-10">

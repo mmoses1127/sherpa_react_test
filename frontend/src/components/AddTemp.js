@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTemperatureSetting } from "../store/temperatureSettings";
@@ -13,6 +13,15 @@ const AddTemp = () => {
   const [endTime, setEndTime] = useState('');
   const [temperature, setTemperature] = useState('');
   const unit = findUnitCookie('temp').slice(0,1);
+
+  useEffect(() => {
+    if (unit === 'F') {
+      if (temperature > 212) setTemperature(212);
+    } else {
+      if (temperature < 0) setTemperature(0);
+      if (temperature > 100) setTemperature(100);
+    }
+  }, [temperature]);
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -56,15 +65,15 @@ const AddTemp = () => {
         <form className="settings-form flex flex-col items-center justify-evenly p-5">
           <div className="w-full flex flex-row justify-between items-center">
             <label htmlFor="start-time" className="start-time-setting m-3 w-full text-slate-50">Start</label>
-              <input onChange={e => setStartTime(e.target.value)} className="text-white bg-blue p-3 m-3 w-1/2" type="time" name="start-time" id="start-time" value={startTime} />
+              <input onChange={e => setStartTime(e.target.value)} className="text-white bg-blue p-3 m-3 w-1/2 min-w-[130px]" type="time" name="start-time" id="start-time" value={startTime} />
           </div>
           <div className="w-full flex flex-row justify-between items-center">
           <label htmlFor="end-time" className="end-time-setting m-3 w-full">End</label>
-            <input onChange={e => setEndTime(e.target.value)} className="bg-blue p-3 m-3 w-1/2" type="time" name="end-time" id="end-time" value={endTime} />
+            <input onChange={e => setEndTime(e.target.value)} className="bg-blue p-3 m-3 w-1/2 min-w-[130px]" type="time" name="end-time" id="end-time" value={endTime} />
           </div>
           <div className="w-full flex flex-row justify-between items-center">
           <label htmlFor="temp" className="temp-setting m-3 w-full">Temperature ({unit})</label>
-            <input onChange={e => setTemperature(e.target.value)}className="bg-blue p-3 m-3 w-1/2" type="number" name="temp" id="temp" value={temperature} />
+            <input onChange={e => setTemperature(e.target.value)}className="bg-blue p-3 m-3 w-1/2 min-w-[130px]" min={unit === 'F' ? '32' : '0'} type="number" step="0.1" name="temp" id="temp" value={temperature} />
 
           </div>
         </form>

@@ -12,7 +12,7 @@ controls and set settings intervals for either temperature or fan speed.
 - User A can delete, edit and add new list items.
 - User A can also switch the temperature view from Fahrenheit to Celsius in a
 separate page.
-- Consider the server only takes in measurements in Celsius
+- Consider the server only takes in measurements in Celsius.
 - User B will create a list of fan intensities in a 24h period.
 - Each list item will contain 3 values: Start time, end time, intensity value (low,
 medium, high).
@@ -51,11 +51,11 @@ Sign up is currently disabled but below are the login credentials for the two us
 
 A few commented-out functions remain in the code base. These are functions I would recommend to improve the application, but were not explicitly required by the client.
 
-- I suspect that allowing fan speed or temperature interval settings that overlap each other would cause unpredictable results. Therefore, a custom validation to prevent overlapping entries is included (location: 'temperature_setting.rb' and 'speed_setting.rb).
+- I suspect that allowing fan speed or temperature interval settings that overlap each other would cause unpredictable results. Therefore, a custom validation to prevent overlapping entries is included (location: 'temperature_setting.rb' and 'speed_setting.rb').
 
 - A user signup thunk action is included in case signup functionality is desired (location: 'session.js').
 
-- A validation requiring end times to be after start times when creating or updating setting items has been included and is active due to its logical importance (location: '')
+- A validation requiring end times to be after start times when creating or updating setting items has been included and is active due to its logical importance (location: 'temperature_setting.rb' and 'speed_setting.rb').
 
 ## Errors and Validations
 

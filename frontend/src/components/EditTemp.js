@@ -90,7 +90,7 @@ const EditTemp = () => {
           </div>
           <div className="w-full flex flex-row justify-between items-center">
           <label htmlFor="temp" className="temp-setting m-3 w-full">Temperature ({unit})</label>
-            <input onChange={e => setTemperature(e.target.value)}className="bg-blue p-3 m-3 w-1/2 min-w-[130px]" type="number" step="0.1" name="temp" id="temp" value={temperature} />
+            <input onChange={e => setTemperature(e.target.value)}className="bg-blue p-3 m-3 w-1/2 min-w-[130px]" type="number" min={unit === 'F' ? '32' : '0'} max={unit === 'F' ? '212' : '100'} step="0.1" name="temp" id="temp" value={temperature} />
 
           </div>
         </form>

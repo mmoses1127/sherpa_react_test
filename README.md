@@ -20,6 +20,10 @@ medium, high).
 - User B can also switch the intensity from [low, medium, high] to [1, 2, 3].
 - Consider the server only takes in number values [1,2,3].
 
+# Demo
+
+[Demo Video](https://www.loom.com/share/5f42a65e8ff3413ab3a14b5ac29ff586)
+
 # Deployment
 
 1. This application features a React/Redux frontend and a Ruby on Rails backend linked at a PostgreSQL database.

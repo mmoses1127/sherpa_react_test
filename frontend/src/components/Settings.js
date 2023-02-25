@@ -73,6 +73,7 @@ const Settings = () => {
       button2.innerHTML = userType === 'A' ? 'Celcius &#x2713;' : 'Labels &#x2713;'
     }
     
+    
   }, [tempUnit, speedUnit, userType]);
 
 

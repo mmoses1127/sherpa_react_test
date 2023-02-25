@@ -72,7 +72,7 @@ const Settings = () => {
       button2.style.color = 'white';
       button2.innerHTML = userType === 'A' ? 'Celcius &#x2713;' : 'Labels &#x2713;'
     }
-    
+
     
   }, [tempUnit, speedUnit, userType]);
 
@@ -128,6 +128,7 @@ const Settings = () => {
     </div>
   )
 
+  
 }
 
 export default Settings;
